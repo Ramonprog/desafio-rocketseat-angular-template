@@ -11,6 +11,6 @@ export class UserService {
   private readonly _httpClient = inject(HttpClient);
   //no angular não usamos fetch nem axios, usamos o HttpClient
   validateUser() {
-    return this._httpClient.get<IAuthSuccessResponse>('http://localhost:3000/protected');
+    return this._httpClient.get<IAuthSuccessResponse>('http://localhost:3000/api/protected');
   }
 }

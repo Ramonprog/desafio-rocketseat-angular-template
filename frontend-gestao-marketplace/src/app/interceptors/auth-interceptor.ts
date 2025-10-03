@@ -21,7 +21,7 @@ export const authInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn) 
     const authReq = req.clone({
       headers: req.headers.append('Authorization', `Bearer ${HAS_TOKEN}`),
     });
-    next(authReq);
+    return next(authReq);
   }
-  next(req);
+  return next(req);
 };
