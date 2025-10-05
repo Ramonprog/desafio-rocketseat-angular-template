@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { IAuthSuccessResponse } from '../interfaces/auth-success-response';
+import { ILoginSuccessResponse } from '../interfaces/login-sucess-response';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +14,12 @@ export class UserService {
   //no angular não usamos fetch nem axios, usamos o HttpClient
   validateUser() {
     return this._httpClient.get<IAuthSuccessResponse>('http://localhost:3000/api/protected');
+  }
+
+  login(email: string, password: string): Observable<ILoginSuccessResponse> {
+    return this._httpClient.post<ILoginSuccessResponse>('http://localhost:3000/api/users/login', {
+      email,
+      password,
+    });
   }
 }
