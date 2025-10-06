@@ -15,6 +15,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class Products {
   private readonly _productsService = inject(ProductsService);
   products: IProductResponseList[] = [];
+  filteredProducts: IProductResponseList[] = [];
 
   filterForm = new FormGroup({
     title: new FormControl(''),
@@ -29,7 +30,23 @@ export class Products {
       .subscribe({
         next: (res) => {
           this.products = res.data;
+          this.filteredProducts = res.data;
         },
       });
+  }
+
+  applyFilter() {
+    const title = this.filterForm.value.title?.toLowerCase();
+    const status = this.filterForm.value.status?.toLowerCase();
+
+    this.filteredProducts = this.products.filter(
+      (product) =>
+        (!title || product.title.toLowerCase().includes(title)) &&
+        (!status || product.status.toLowerCase() === status)
+    );
+  }
+
+  resertFilter() {
+    this.filteredProducts = this.products;
   }
 }

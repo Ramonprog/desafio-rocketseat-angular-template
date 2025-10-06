@@ -44,6 +44,7 @@
             <!-- Botão Aplicar filtro -->
             <div
               class="flex justify-center p-3 rounded-lg bg-[#F24D0D] cursor-pointer active:translate-y-2 duration-200 ease-in-out transition"
+              (click)="applyFilter()"
             >
               <span class="text-white text-sm">Aplicar filtro</span>
             </div>
@@ -51,6 +52,7 @@
             <!-- Botão Limpar filtro -->
             <div
               class="flex justify-center p-3 rounded-lg bg-[#6aa3ff] cursor-pointer active:translate-y-2 duration-200 ease-in-out transition"
+              (click)="resertFilter()"
             >
               <span class="text-white text-sm">Limpar filtro</span>
             </div>
@@ -61,7 +63,7 @@
       <!-- Lista de Produtos -->
       <div class="flex gap-3 flex-wrap">
         <!-- Produto 1 -->
-        @for (product of products; track product.id) {
+        @for (product of filteredProducts; track product.id) {
         <div class="bg-white rounded-2xl p-1 w-[45%] min-w-96 flex flex-col cursor-pointer">
           <div class="h-48 relative">
             <img class="rounded-2xl w-full h-48 object-cover" [src]="product.imageBase64" />
